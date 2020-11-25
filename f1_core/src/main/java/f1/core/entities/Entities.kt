@@ -5,9 +5,9 @@ import javax.persistence.*
 @Entity
 data class Pilot(
         @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: Long? = null,
-        var firstName: String = "",
-        var lastName: String = "",
-        @ManyToOne var team: Team,
+        var firstName: String,
+        var lastName: String,
+        @OneToOne var team: Team,
         var isRetired: Boolean = false,
         var championshipTitle: Int = 0
 )
@@ -15,7 +15,7 @@ data class Pilot(
 @Entity
 data class Team(
         @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: Long?,
-        var name: String = "",
+        var name: String,
         var championshipTitle: Int = 0
 )
 
@@ -31,7 +31,7 @@ data class Championship(
         @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: Long?,
         @OneToOne var team: Team,
         @OneToOne var pilot: Pilot,
-        @ManyToOne var season: Season,
+        @OneToOne var season: Season,
         @OneToOne var track: Track,
         var pointScored: Int = 0
 )
