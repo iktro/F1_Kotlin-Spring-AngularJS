@@ -3,6 +3,7 @@ package f1.core.service
 import f1.core.dao.PilotDAO
 import f1.core.entities.Pilot
 import org.springframework.stereotype.Service
+import java.util.*
 import javax.transaction.Transactional
 
 @Service
@@ -17,7 +18,7 @@ open class PilotService(private var pilotDAO: PilotDAO) {
 
     fun save(pilot: Pilot) = pilotDAO.save(pilot)
 
-    fun count(): Long = pilotDAO.count()
+    fun findOneByID(pilotId: Long): Optional<Pilot> = pilotDAO.findById(pilotId)
 
     fun deleteAll() = pilotDAO.deleteAll()
 

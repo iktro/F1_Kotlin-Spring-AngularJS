@@ -19,6 +19,10 @@ class PilotController(private val pilotService: PilotService) : RestController {
     fun getAllPilots() = pilotService.findAll().stream().map(this::pilotToDTO).toList()
 
     @GET
+    @Path("/allRetired")
+    fun getAllRetiredPilots() = pilotService.findAllRetiredPilots().stream().map(this::pilotToDTO).toList()
+
+    @GET
     @Path("/allActive")
     fun getAllActivePilots() = pilotService.findAllCurrentPilots().stream().map(this::pilotToDTO).toList()
 
