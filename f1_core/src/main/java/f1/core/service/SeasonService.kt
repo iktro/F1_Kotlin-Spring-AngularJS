@@ -2,12 +2,16 @@ package f1.core.service
 
 import f1.core.dao.SeasonDAO
 import f1.core.entities.Season
+import org.springframework.stereotype.Service
+import javax.transaction.Transactional
 
-class SeasonService(private val seasonDAO: SeasonDAO) {
+@Service
+@Transactional
+open class SeasonService(private var seasonDAO: SeasonDAO) {
 
     fun findAll(): List<Season> = seasonDAO.findAll()
 
-    fun saveTeam(season: Season) = seasonDAO.save(season)
+    fun save(season: Season) = seasonDAO.save(season)
 
     fun count(): Long = seasonDAO.count()
 
