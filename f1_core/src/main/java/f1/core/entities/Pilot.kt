@@ -5,9 +5,9 @@ import javax.persistence.*
 @Entity
 data class Pilot(
         @Id @GeneratedValue(strategy = GenerationType.AUTO) val id: Long? = null,
-        var firstName: String,
-        var lastName: String,
-        @OneToOne var team: Team,
+        var firstName: String = "",
+        var lastName: String = "",
+        @OneToOne var team: Team? = null,
         var isRetired: Boolean = false,
         var championshipTitle: Int = 0
 )

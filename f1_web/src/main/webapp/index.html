@@ -2,15 +2,88 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="AngularJS/angular.min.js"></script>
+    <title>F1</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="AngularJS/myAngularJS.js"></script>
+    <link href="style/style.css" rel="stylesheet"/>
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
           integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" rel="stylesheet">
 </head>
 <body>
+<nav class="navbar row bg-primary">
+    <ul class="list-group">
+        <li><img alt="Logo F1" class=" col-md-3"
+                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/1498px-F1.svg.png"/></li>
+        <li href="">Second page</li>
+        <li href="">Third page</li>
+    </ul>
+</nav>
 
-<h1>Hello world</h1>
+<main ng-app="myApp" ng-controller="mainController as mainCtrl">
+    <div class="row center-block">
+        <label> For Season :
+            <select ng-click="changeSeason()"
+                    ng-model="selectedYear"
+                    ng-options="season.year as season.year for season in mainCtrl.seasons">
+            </select>
+        </label>
+    </div>
 
+    <div class="row">
+        <table class="table-bordered col-md-5" title="Pilots result for season : ">
+            <tr>
+                <th>#</th>
+                <th> Pilot</th>
+                <th> Team</th>
+                <th> Points</th>
+            </tr>
+            <tr ng-repeat="result in mainCtrl.pilotsSeason">
+                <td> {{$index + 1 }}</td>
+                <td> {{ result.pilot.lastName }} {{ result.pilot.firstName }}</td>
+                <td> {{ result.team.name }}</td>
+                <td> {{ result.pointScored }}</td>
+            </tr>
+        </table>
+
+        <div class="col-md-2"></div>
+
+        <table class="table-bordered col-md-5" title="Teams result for season : ">
+            <tr>
+                <th>#</th>
+                <th> Team</th>
+                <th> Points</th>
+            </tr>
+            <tr ng-repeat="result in mainCtrl.teamsSeason">
+                <td> {{$index + 1 }}</td>
+                <td> {{ result.team.name }}</td>
+                <td> {{ result.pointScored }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="row">
+        <label> Select track :
+            <select ng-click="changeTrack()"
+                    ng-model="selectedTrack"
+                    ng-options="track.id as track.name for track in mainCtrl.tracksSeason">
+            </select>
+        </label>
+        <br/>
+        <table class="table-bordered col-md-5" title="Pilots result for season : ">
+            <tr>
+                <th>#</th>
+                <th> Pilot</th>
+                <th> Team</th>
+                <th> Points</th>
+            </tr>
+            <tr ng-repeat="result in mainCtrl.trackResult">
+                <td> {{$index + 1 }}</td>
+                <td> {{ result.pilot.lastName }} {{ result.pilot.firstName }}</td>
+                <td> {{ result.team.name }}</td>
+                <td> {{ result.pointScored }}</td>
+            </tr>
+        </table>
+    </div>
+</main>
 </body>
 </html>

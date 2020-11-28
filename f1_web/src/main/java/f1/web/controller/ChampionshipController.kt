@@ -1,11 +1,13 @@
 package f1.web.controller
 
 import f1.core.entities.Championship
+import f1.core.entities.Track
 import f1.core.service.ChampionshipService
 import f1.web.dto.ChampionshipDTO
 import org.springframework.stereotype.Controller
 import javax.ws.rs.*
 import javax.ws.rs.core.MediaType
+import kotlin.streams.toList
 
 @Controller
 @Path("/championship")
@@ -19,7 +21,11 @@ class ChampionshipController(private val championshipService: ChampionshipServic
         val pilots = championshipService.findAllPilotsInSeason(season)
         val currentChampDTO = mutableListOf<ChampionshipDTO>()
         for (pilot in pilots) {
-            currentChampDTO += ChampionshipDTO(team = pilot.team, pilot = pilot, pointScored = championshipService.getPilotScoreForSeason(season, pilot))
+            currentChampDTO += ChampionshipDTO(
+                    team = championshipService.getPilotTeamForSeason(season, pilot),
+                    pilot = pilot,
+                    pointScored = championshipService.getPilotScoreForSeason(season, pilot)
+            )
         }
         currentChampDTO.sortBy { it.pointScored }
         currentChampDTO.reverse()
@@ -38,6 +44,18 @@ class ChampionshipController(private val championshipService: ChampionshipServic
         currentChampDTO.reverse()
         return currentChampDTO
     }
+
+    @GET
+    @Path("/tracks/{year}")
+    fun getResultsForARace(@PathParam("year") season: Long): List<Track> =
+            championshipService.getTracksDuringSeason(season)
+
+    @GET
+    @Path("/tracksResult/{year}/{trackId}")
+    fun getResultsForARace(@PathParam("year") season: Long,
+                           @PathParam("trackId") trackId: Long): List<ChampionshipDTO> =
+            championshipService.findPilotsForARace(season, trackId)
+                    .stream().map(this::championshipToDTO).toList().reversed()
 
     private fun championshipToDTO(championship: Championship): ChampionshipDTO {
         val championshipDTO = ChampionshipDTO()

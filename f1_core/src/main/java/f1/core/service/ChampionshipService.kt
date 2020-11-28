@@ -17,17 +17,20 @@ open class ChampionshipService(private var championshipDAO: ChampionshipDAO) {
     fun getPilotScoreForSeason(season: Long, pilot: Pilot) =
             championshipDAO.getPilotScoreForSeason(season, pilot)
 
+    fun getPilotTeamForSeason(season: Long, pilot: Pilot): Team =
+            championshipDAO.getPilotTeamForSeason(season, pilot)[0]
+
     fun findAllTeamsInSeason(season: Long): List<Team> =
             championshipDAO.findAllTeamsInSeason(season)
 
     fun getTeamScoreForSeason(season: Long, team: Team) =
             championshipDAO.getTeamScoreForSeason(season, team)
 
-    /*
+    fun getTracksDuringSeason(season: Long) =
+            championshipDAO.getTracksDuringSeason(season)
+
     fun findPilotsForARace(season: Long, trackId: Long): List<Championship> =
             championshipDAO.findPilotScoreForARace(season, trackId)
-    */
-
 
     fun save(championship: Championship): Championship =
             championshipDAO.save(championship)

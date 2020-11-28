@@ -19,7 +19,7 @@ data class TeamDTO(
 )
 
 data class SeasonDTO(
-        var year: Long = 1950,
+        var year: Long? = 1950,
         var isOver: Boolean = false,
         var numberOfRaces: Int = 0
 )

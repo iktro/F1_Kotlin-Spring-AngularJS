@@ -1,0 +1,13 @@
+.col-md-3 img {
+    width: 3em;
+    height: auto;
+}
+
+main {
+    padding: 1em;
+    background-color: #999;
+}
+
+.list-inline ul {
+    padding: 0;
+}

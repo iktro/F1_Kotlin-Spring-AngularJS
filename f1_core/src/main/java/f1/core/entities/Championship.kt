@@ -4,10 +4,10 @@ import javax.persistence.*
 
 @Entity
 data class Championship(
-        @Id @GeneratedValue(strategy = GenerationType.AUTO) val id: Long?,
-        @OneToOne var team: Team,
-        @OneToOne var pilot: Pilot,
-        @OneToOne var season: Season,
-        @OneToOne var track: Track,
+        @Id @GeneratedValue(strategy = GenerationType.AUTO) val id: Long? = null,
+        @OneToOne var team: Team? = null,
+        @OneToOne var pilot: Pilot? = null,
+        @OneToOne var season: Season? = null,
+        @OneToOne var track: Track? = null,
         var pointScored: Int = 0
 )

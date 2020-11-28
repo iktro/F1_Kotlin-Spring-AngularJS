@@ -7,7 +7,7 @@ import javax.persistence.Id
 
 @Entity
 data class Team(
-        @Id @GeneratedValue(strategy = GenerationType.AUTO) val id: Long?,
-        var name: String,
+        @Id @GeneratedValue(strategy = GenerationType.AUTO) val id: Long? = null,
+        var name: String = "",
         var championshipTitle: Int = 0
 )

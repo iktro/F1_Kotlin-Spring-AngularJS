@@ -62,14 +62,14 @@ public class Application {
 
     private static Map<String, Season> registerSeason(final SeasonService seasonService) {
         Map<String, Season> seasons = new HashMap<>();
-        seasons.put("2018", createSeason(2018, true, 21, seasonService));
-        seasons.put("2019", createSeason(2019, true, 21, seasonService));
-        seasons.put("2020", createSeason(2020, false, 17, seasonService));
+        seasons.put("2018", createSeason((long) 2018, true, 21, seasonService));
+        seasons.put("2019", createSeason((long) 2019, true, 21, seasonService));
+        seasons.put("2020", createSeason((long) 2020, false, 17, seasonService));
 
         return seasons;
     }
 
-    private static Season createSeason(int year, Boolean isOver, int numberOfRaces, SeasonService seasonService) {
+    private static Season createSeason(Long year, Boolean isOver, int numberOfRaces, SeasonService seasonService) {
         Season season = new Season(year, isOver, numberOfRaces);
         seasonService.save(season);
         return season;

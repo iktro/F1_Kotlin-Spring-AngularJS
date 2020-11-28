@@ -5,7 +5,7 @@ import javax.persistence.Id
 
 @Entity
 data class Season(
-        @Id val year: Long,
+        @Id val year: Long? = null,
         var isOver: Boolean = false,
         var numberOfRaces: Int = 0
 )
